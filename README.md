@@ -1,6 +1,13 @@
 # DataPlatHW
 DataPlatHW
 
+dataset link - https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset/data 
+
+
+1. later
+2. Jonathan
+3. Boris
+4. Boris to create initial draft
 
 
 ```bash
