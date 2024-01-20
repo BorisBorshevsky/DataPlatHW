@@ -1,0 +1,42 @@
+Highest Average Ratings by Genre:
+This query calculates the average rating for books in each genre.
+SELECT b.genre, AVG(br.book_rating) AS avg_rating
+FROM books b
+JOIN book_ratings br ON b.isbn = br.isbn
+GROUP BY b.genre
+ORDER BY avg_rating DESC;
+
+User Activity Over Time:
+
+SELECT date_trunc('month', timestamp) AS month, COUNT(*) AS rating_count
+FROM book_ratings
+GROUP BY month
+ORDER BY month;
+
+
+Popular Authors by Number of Ratings:
+SELECT b.book_author, COUNT(*) AS rating_count
+FROM book_ratings br
+JOIN books b ON br.isbn = b.isbn
+GROUP BY b.book_author
+ORDER BY rating_count DESC
+LIMIT N;
+
+Age Distribution of Users by Genre:
+SELECT b.genre, u.age, COUNT(*) AS user_count
+FROM book_ratings br
+JOIN books b ON br.isbn = b.isbn
+JOIN users u ON br.user_id = u.user_id
+GROUP BY b.genre, u.age
+ORDER BY b.genre, u.age;
+
+Books with Highest Ratings and Most Ratings:
+This query finds books that have both high average ratings and a significant number of ratings.
+cql
+
+SELECT b.book_title, AVG(br.book_rating) AS avg_rating, COUNT(*) AS rating_count
+FROM book_ratings br
+JOIN books b ON br.isbn = b.isbn
+GROUP BY b.book_title
+HAVING avg_rating >= your_threshold AND rating_count >= your_threshold
+ORDER BY avg_rating DESC, rating_count DESC;
