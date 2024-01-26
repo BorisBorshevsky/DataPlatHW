@@ -33,8 +33,14 @@ def load_data_concurrent(csv_file, insert_query, data_types, batch_size=100, con
     '''
 
     # Helper functions
+
+    prev = 1
     def convert_data(row):
-        print(row[0])
+        global c
+        if int(row[0]) == c:
+            print("oops " + row[0])
+        c = int(row[0])
+
         # Convert a single row's data to the correct format according to the data_types
         converted_data = [data_type(value) if value else data_type() for value, data_type in zip(row, data_types)]
         # for value, data_type in zip(row, data_types):
@@ -51,7 +57,6 @@ def load_data_concurrent(csv_file, insert_query, data_types, batch_size=100, con
         # Build a batch statement for the current set of rows (single batch)
         batch = BatchStatement()
         for row in rows:
-            c = c + 1
             if row:
                 try:
                     converted_row = convert_data(row)
@@ -78,7 +83,6 @@ def load_data_concurrent(csv_file, insert_query, data_types, batch_size=100, con
     for r in rows:
         build_batch(r)
 
-
     print(c)
 
     # concurrently run each batch
@@ -92,6 +96,7 @@ def count_lines(file_name):
         count = sum(1 for line in csv_reader if line)
     return count
 
+
 def count_ids(file_name):
     ids = []
     with open(file_name, 'r') as file:
@@ -99,6 +104,7 @@ def count_ids(file_name):
         for line in csv_reader:
             ids.append(line.split(",")[0])
     return ids
+
 
 def find_duplicates(csv_file):
     seen_values = set()
@@ -123,12 +129,21 @@ if __name__ == '__main__':
 
     inserted = 271360
     # A list of data types for this table
-    books_data_types = [str, str, str, int, str, str, str, str]  # ISBN,Book-Title,Book-Author,Year-Of-Publication,Publisher,Image-URL-S,Image-URL-M,Image-URL-L
+    books_data_types = [str, str, str, int, str, str, str,
+                        str]  # ISBN,Book-Title,Book-Author,Year-Of-Publication,Publisher,Image-URL-S,Image-URL-M,Image-URL-L
+
+    users_query = """
+                    INSERT INTO users (User_ID, Location, Age)
+                    VALUES (%s, %s, %s)
+                    """
+
+    # A list of data types for this table
+    users_data_types = [int, str, float]  # User_ID, Location, Age
 
     # load data
-    # load_data_concurrent('Data/Books.csv', books_query, books_data_types)
+    load_data_concurrent('Data/Users.csv', users_query, users_data_types)
     # line_count = count_lines('Data/Books.csv')
     # print(line_count)
-    row_count = session.execute("SELECT COUNT(1) FROM books").one()
-    print(row_count)
-    find_duplicates('Data/Books.csv')
+    # row_count = session.execute("SELECT COUNT(1) FROM books").one()
+    # print(row_count)
+    # find_duplicates('Data/Books.csv')
