@@ -1,1 +1,0 @@
-{"id":"sna8dY0crvfwqjML","body":"  SELECT publisher, COUNT (*) AS publish_count\n  FROM books.publisher_books\n  GROUP BY publisher\n  LIMIT 500;\n\n-- ORDER BY publish_count DESC\n-- GRPUP BY works in cql and not workbench ","filename":"script_6.cql","clusterName":"Cluster AllowAllAuthenticator","keyspace":"books","source":"action","modified":true}

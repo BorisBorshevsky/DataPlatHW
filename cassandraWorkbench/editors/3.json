@@ -1,1 +1,0 @@
-{"id":"IldgAbYSDr5fsxZ4","body":"CREATE TABLE books.publisher_books(\n\tISBN text,\n\tpublisher text,\n\tyear_of_publication int,\n\tPRIMARY KEY((publisher), year_of_publication, ISBN)\n);\n\n-- create table for publisher queries","filename":"script_5.cql","clusterName":"Cluster AllowAllAuthenticator","keyspace":"books","source":"action","modified":true}

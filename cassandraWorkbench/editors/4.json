@@ -1,1 +1,0 @@
-{"id":"WGeIETkoV6tUNjLv","body":"SELECT publisher, COUNT(*) as book_counts\nFROM books.publishers_view\nGROUP BY publisher\nLIMIT 100;\n\n-- ORDER BY book_counts - doesnt work\n-- group by works only in Cqlsh","filename":"script_3.cql","clusterName":"Cluster AllowAllAuthenticator","keyspace":"books","source":"action","modified":true}

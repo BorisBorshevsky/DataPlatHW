@@ -1,1 +1,0 @@
-{"id":"G8FgvNBkstiEmbrK","clusterName":"Cluster AllowAllAuthenticator","keyspace":"books","body":"SELECT publisher,year_of_publication, COUNT (*) AS publish_count \r\nFROM publisher_books \r\nGROUP BY publisher, year_of_publication;\r\n\r\n-- count per publisher and per year","modified":true,"filename":"script_7.cql","source":"action"}
