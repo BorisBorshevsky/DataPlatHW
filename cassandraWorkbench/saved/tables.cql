@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS books.books(
 	image_url_s text,
 	isbn text,
 	publisher text,
-	year_of_publication int,
+	yop int,
 	PRIMARY KEY(isbn)
 );
 
