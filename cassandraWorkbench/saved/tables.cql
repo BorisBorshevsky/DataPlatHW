@@ -43,3 +43,16 @@ create table users_by_rated_books
     book_rating int,
     primary key ((user_id), book_author, isbn)
 );
+
+    CREATE TABLE IF NOT EXISTS ratings_by_age (
+        user_id int,
+        isbn text,
+        book_rating int,
+
+        age int,
+        age_group text,
+        book_author text,
+        publisher text,
+        
+        primary key (age_group, book_author, isbn, user_id)
+    )
