@@ -27,7 +27,7 @@ create table books_rated_by_user
     yop int,
     publisher text,
     book_rating int,
-    primary key ((isbn), user_id)
+    primary key ((isbn), location, user_id)
 );
 
 
@@ -41,5 +41,5 @@ create table users_by_rated_books
     yop int,
     publisher text,
     book_rating int,
-    primary key ((user_id), isbn)
+    primary key ((user_id), book_author, isbn)
 );
